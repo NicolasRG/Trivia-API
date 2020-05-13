@@ -1,5 +1,6 @@
 package com.NicolasRamosGomez.Trivia.API;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -8,6 +9,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @RestController
 public class QuestionsController {
+
+    @Value("${database.url}")
+    private String databaseURL;
 
     QuestionsController(){}
 
@@ -25,7 +29,7 @@ public class QuestionsController {
         // can throw SQL exception
         try {
             //create connection
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306?" + "user=root&password=9780");
+            Connection conn = DriverManager.getConnection(databaseURL);
             Statement statement = conn.createStatement();
             statement.execute("USE trivia");//always use trivia database
             ResultSet resultset = statement.executeQuery(query);
