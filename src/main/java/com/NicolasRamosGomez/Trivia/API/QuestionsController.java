@@ -17,7 +17,7 @@ public class QuestionsController {
     QuestionsController(){}
 
     /**
-     * Generates a random id and returns the associated
+     * Generates a random id and returns the associated question
      * @return
      */
     @GetMapping("/randomQuestion")

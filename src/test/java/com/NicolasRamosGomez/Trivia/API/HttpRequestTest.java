@@ -2,7 +2,6 @@ package com.NicolasRamosGomez.Trivia.API;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -10,6 +9,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -43,6 +43,11 @@ public class HttpRequestTest {
         Question question = this.restTemplate.getForObject("http://localhost:" + port +"/Question/2", Question.class);
         answer.setAir_date(question.getAir_date());//cheat cause i dont know how to get the date to format to the same one
         assertThat(question).as("Check question 2" ).isEqualTo(answer);
+    }
+
+    @Test
+    public void getQuestionByCategory() throws Exception{
+        QuestionList questions = restTemplate.getForObject("http://localhost:"+port+"/Category/History", QuestionList.class);
     }
 
 }
